@@ -21,7 +21,7 @@ public class Invite  extends Model{
 	
 	
 	@Id
-	public long Id;
+	public long id;
 	
 
 	public String nom;

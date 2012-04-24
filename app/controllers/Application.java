@@ -9,6 +9,15 @@ import views.html.*;
 import com.avaje.ebean.annotation.Transactional;
 
 public class Application extends Controller {
+	
+	
+	 public static Result GO_HOME = redirect(
+		        routes.Application.index(0, "nom", "asc", "")
+		    );
+		    
+		   
+		
+	
   
 	@Transactional(readOnly=true)
   public static Result index(int page, String sortBy, String order, String filter) {
@@ -28,7 +37,24 @@ public class Application extends Controller {
         		createForm.render(inviteForm)
         );
     }
-  
+    public static Result edit(Long id) {
+        Form<Invite> computerForm = form(Invite.class).fill(
+        		Invite.find.byId(id)
+        );
+        return ok(
+            editForm.render(id, computerForm)
+        );
+    }
+    
+    public static Result update(Long id) {
+        Form<Invite> inviteForm = form(Invite.class).bindFromRequest();
+        if(inviteForm.hasErrors()) {
+            return badRequest(editForm.render(id, inviteForm));
+        }
+        inviteForm.get().update(id);
+        flash("success", "Computer " + inviteForm.get().nom + " has been updated");
+        return GO_HOME;
+    }
     
    
     public static Result save() {
@@ -38,7 +64,14 @@ public class Application extends Controller {
         }
         inviteForm.get().save();
         flash("success", "Invite " + inviteForm.get().nom + " has been created");
-        return  redirect(routes.Application.index(0, "nom", "asc", ""));
+        return  GO_HOME;
     }
+    
+    public static Result delete(Long id) {
+        Invite.find.ref(id).delete();
+        flash("success", "Invite has been deleted");
+        return GO_HOME;
+    }
+    
     
 }

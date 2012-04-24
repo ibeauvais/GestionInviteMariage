@@ -68,7 +68,7 @@
             <tbody>
   @for(invite <- currentPage.getList) {
                     <tr>
-                        <td><a href="#">@invite.nom</a></td>
+                        <td><a href="@routes.Application.edit(invite.id)">@invite.nom</a></td>
                        	<td>@invite.presence</td>
                     </tr>
                 }

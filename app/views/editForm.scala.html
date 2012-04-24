@@ -1,0 +1,37 @@
+@(id: Long, inviteForm: Form[Invite])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Modification"){
+    
+    <h1>Modification Invite</h1>
+    
+    @form(routes.Application.update(id)) {
+        
+        <fieldset>
+        
+             @inputText(inviteForm("nom"), '_label -> "Libelle")
+
+            @select(
+                inviteForm("presence"), 
+                options(Invite.presence), 
+                '_label -> "Presence", '_default -> "--",
+                '_showConstraints -> true
+            )
+        
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Modification" class="btn primary"> or 
+            <a href="@routes.Application.index()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+    @form(routes.Application.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Suppression" class="btn danger">
+    }
+    
+}
