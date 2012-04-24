@@ -1,5 +1,7 @@
 package models;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,16 +23,14 @@ public class Invite  extends Model{
 	@Id
 	public long Id;
 	
-	@Required
+
 	public String nom;
-	
-	@Required
 	public Presence presence;
 	
-	//public boolean isPresentDimanche;
-	
-	public List<Adulte>adultes;
-	public List<Enfant>enfants;
+//	public Boolean presentDimanche;
+//	
+//	public List<Adulte>adultes;
+//	public List<Enfant>enfants;
 	
 	
     public static Finder<Long,Invite> find = new Finder<Long,Invite>(Long.class, Invite.class); 
@@ -40,8 +40,18 @@ public class Invite  extends Model{
 	            find.where()
 	                .ilike("nom", "%" + filter + "%")
 	                .orderBy(sortBy + " " + order)
-	               // .fetch("company")
 	                .findPagingList(pageSize)
 	                .getPage(page);
 	    }
+	 
+	 
+	 
+	 public static Map<String,String> presence(){
+		 
+		 Map<String,String>  result=new HashMap<String,String>(Presence.values().length);
+		 for(Presence presence:Presence.values())
+			 result.put(presence.toString(),presence.toString());
+		 
+		 return result;
+	 }
 }

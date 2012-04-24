@@ -1,9 +1,10 @@
 package controllers;
 
 import models.Invite;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.index;
+import views.html.*;
 
 import com.avaje.ebean.annotation.Transactional;
 
@@ -17,5 +18,27 @@ public class Application extends Controller {
 	            )
 	        );
   }
+	
+	
+	
+		
+    public static Result create() {
+        Form<Invite> inviteForm = form(Invite.class);
+        return ok(
+        		createForm.render(inviteForm)
+        );
+    }
   
+    
+   
+    public static Result save() {
+        Form<Invite> inviteForm = form(Invite.class).bindFromRequest();
+        if(inviteForm.hasErrors()) {
+            return badRequest(createForm.render(inviteForm));
+        }
+        inviteForm.get().save();
+        flash("success", "Invite " + inviteForm.get().nom + " has been created");
+        return  redirect(routes.Application.index(0, "nom", "asc", ""));
+    }
+    
 }

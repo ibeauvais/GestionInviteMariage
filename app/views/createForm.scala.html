@@ -1,0 +1,34 @@
+@(inviteForm: Form[Invite])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("creation") {
+    
+    <h1>Ajouter invite</h1>
+    
+    @form(routes.Application.save()) {
+        
+        <fieldset>
+        
+            @inputText(inviteForm("nom"), '_label -> "Libelle")
+
+            @select(
+                inviteForm("presence"), 
+                options(Invite.presence), 
+                '_label -> "Presence", '_default -> "--",
+                '_showConstraints -> true
+            )
+            
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Ajout de l'invite" class="btn primary"> or 
+            <a href="@routes.Application.index()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}
