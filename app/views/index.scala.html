@@ -62,6 +62,8 @@
             <thead>
                 <tr>
                     @header("nom", "nom")
+                    @header("Nombre d'adulte", "Nombre d'adulte")
+                    @header("Nombre d'enfant", "Nombre d'enfant")
                     @header("presence", "Presence")
                 </tr>
             </thead>
@@ -69,6 +71,8 @@
   @for(invite <- currentPage.getList) {
                     <tr>
                         <td><a href="@routes.Application.edit(invite.id)">@invite.nom</a></td>
+                       	<td>@invite.getNbAdulte()</td>
+                       	<td>@invite.getNbEnfant()</td>
                        	<td>@invite.presence</td>
                     </tr>
                 }

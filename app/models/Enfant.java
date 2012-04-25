@@ -12,7 +12,14 @@ public class Enfant extends Model {
 	@Id
 	public long Id;
 	@Required
-	private String nom;
-	private int age;
+	public String nom;
+	public String age;
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Enfant [Id=").append(Id).append(", nom=").append(nom)
+				.append(", age=").append(age).append("]");
+		return builder.toString();
+	}
 
 }

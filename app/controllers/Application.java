@@ -22,7 +22,7 @@ public class Application extends Controller {
 	@Transactional(readOnly=true)
   public static Result index(int page, String sortBy, String order, String filter) {
 	  return ok(index.render(
-	                Invite.page(page, 10, sortBy, order, filter),
+	                Invite.page(page, 50, sortBy, order, filter),
 	                sortBy, order, filter
 	            )
 	        );

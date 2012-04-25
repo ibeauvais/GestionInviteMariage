@@ -2,12 +2,17 @@
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
+
+import models.Adulte;
+import models.Enfant;
+import models.Invite;
+import models.Invite.Presence;
+import models.Invite.PresentDimanche;
+import models.Invite.Type;
+import models.ToDo;
 
 import org.apache.commons.lang.StringUtils;
 
-import models.Invite;
-import models.Invite.Presence;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
@@ -94,7 +99,94 @@ public class Global extends GlobalSettings {
 		Invite invite=new Invite();
 		invite.nom=column[0];
 		invite.presence=toPresence(column,invite.nom);
+		invite.type=toType(column,invite.nom);
+		addAdulte(invite,column[3]);
+		addEnfant(invite,column[4]);
+		invite.presentDimanche=presentDimanche(column[12]);
 		return invite;
+	}
+	
+	
+
+	private PresentDimanche presentDimanche(String value) {
+		if(StringUtils.isBlank(value))
+			return PresentDimanche.NON_RENSEIGNE;
+		
+		if(isCheck2(value))
+			return PresentDimanche.OUI;
+		else
+			return PresentDimanche.NON;
+	}
+
+	private boolean isCheck2(String value) {
+		int valueInt=Integer.parseInt(value);
+		
+		return valueInt>0;
+			
+		
+	}
+
+	private void addEnfant(Invite invite, String nbEnfantString) {
+		try{
+			int nbEnfant=Integer.parseInt(nbEnfantString);
+			for(int i=0;i<nbEnfant;i++){
+				Enfant enfant=new Enfant();
+				enfant.nom="enfant"+(i+1)+" nom";
+				enfant.age="18 Mois";
+				invite.addEnfant(enfant);
+				
+			}
+			
+			if(invite.todo==null){
+				invite.todo=new ToDo();
+				invite.todo.invite=invite;
+				invite.todo.description="";
+			}
+			invite.todo.description+="Completer Enfants";
+		}
+		catch(NumberFormatException  e){
+			Logger.error("["+invite.nom+"]"+"NumberFormatException for convert "+nbEnfantString);
+		}
+		
+	}
+
+	private void addAdulte(Invite invite, String nbAdulteString) {
+		try{
+			int nbAdulte=Integer.parseInt(nbAdulteString);
+			for(int i=0;i<nbAdulte;i++){
+				Adulte adulte=new Adulte();
+				adulte.nom="adulte"+(i+1)+" nom";
+				adulte.prenom="adulte"+(i+1)+" prenom";
+				invite.addAdultes(adulte);
+				
+			}
+			
+			if(invite.todo==null){
+				invite.todo=new ToDo();
+				invite.todo.invite=invite;
+				invite.todo.description="";
+			}
+			invite.todo.description+="Completer Adultes";
+		}
+		catch(NumberFormatException  e){
+			Logger.error("["+invite.nom+"]"+"NumberFormatException for convert "+nbAdulteString);
+		}
+		
+	}
+	
+	private Type toType(String[] column,String nom) {
+		boolean fAurelie=isCheck(column[5]);
+		boolean fIvan=isCheck(column[6]);
+		boolean amis=isCheck(column[7]);
+		
+		if((fAurelie && fIvan) || (fAurelie && amis) || (fIvan && amis))
+				Logger.error("["+nom+"] Trop d'info coche fAurelie="+fAurelie+" fIvan="+fIvan+" amis="+amis);
+		
+		if(fAurelie)return Type.FAMILLE_AURELIE;
+		if(fIvan)return Type.FAMILLE_IVAN;
+		if(amis)return Type.AMIS;
+		
+		return null;
 	}
 
 	private Presence toPresence(String[] column,String nom) {

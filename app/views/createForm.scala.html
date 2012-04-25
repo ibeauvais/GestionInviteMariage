@@ -14,6 +14,20 @@
         
             @inputText(inviteForm("nom"), '_label -> "Libelle")
 
+           @select(
+                inviteForm("presentDimanche"), 
+                options(Invite.presencesDimanche), 
+                '_label -> "Present le dimanche", '_default -> "--",
+                '_showConstraints -> true
+            )
+
+		@select(
+                inviteForm("type"), 
+                options(Invite.types), 
+                '_label -> "Type", '_default -> "--",
+                '_showConstraints -> true
+            )
+
             @select(
                 inviteForm("presence"), 
                 options(Invite.presence), 
