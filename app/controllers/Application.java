@@ -45,7 +45,7 @@ public class Application extends Controller {
             editForm.render(id, computerForm)
         );
     }
-    
+    @Transactional
     public static Result update(Long id) {
         Form<Invite> inviteForm = form(Invite.class).bindFromRequest();
         if(inviteForm.hasErrors()) {
@@ -56,7 +56,7 @@ public class Application extends Controller {
         return GO_HOME;
     }
     
-   
+    @Transactional
     public static Result save() {
         Form<Invite> inviteForm = form(Invite.class).bindFromRequest();
         if(inviteForm.hasErrors()) {

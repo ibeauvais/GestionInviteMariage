@@ -54,4 +54,14 @@ public class Invite  extends Model{
 		 
 		 return result;
 	 }
+
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Invite [id=").append(id).append(", nom=").append(nom)
+				.append(", presence=").append(presence).append("]");
+		return builder.toString();
+	}
 }
