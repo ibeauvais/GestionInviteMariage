@@ -28,7 +28,7 @@ public class Global extends GlobalSettings {
 		
 		super.onStart(arg0);
 		
-		importDataIfDbEmpty();
+		//importDataIfDbEmpty();
 		 Logger.info("Application has started");
 	}
 

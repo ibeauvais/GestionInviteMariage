@@ -32,9 +32,22 @@ public class Application extends Controller {
 	        );
   }
 	
+	
+	
+	/**
+	 * TODO ajouter dj inviter mystere nounou + nous 
+	 * Tarifs Vin 15 +7 €
+	 * + anim 80 +370 
+	 * Repas 45€ + 10€
+	 * 1200 € Serveur
+	 * 350 € vaiselle
+	 * 
+	 * @return
+	 */
 	 public static Result stats() {
-		 Stats aStats=StatsHelper.computStats(); 
-		 return ok(stats.render(aStats));
+			Tarif tarif=Tarif.find.findUnique();
+		 Stats aStats=StatsHelper.computStats(tarif); 
+		 return ok(stats.render(aStats,tarif));
 	    }
 	
 		
@@ -84,11 +97,21 @@ public class Application extends Controller {
     
     
     public static class Stat{
-    	public int nbPersonne;
+    	
     	public BigDecimal repas=BigDecimal.ZERO;
     	public BigDecimal vin=BigDecimal.ZERO;
     	public BigDecimal dimanche=BigDecimal.ZERO;;
-    	public BigDecimal total=BigDecimal.ZERO;;
+    	public BigDecimal total=BigDecimal.ZERO;
+    	
+    	public int nbAdulteRepas;
+    	public int nbAdulteVin;
+    	public int nbAdulteDimanche;
+    	public int nbAdulteTotal;
+    	
+    	public int nbEnfantRepas;
+    	public int nbEnfantVin;
+    	public int nbEnfantDimanche;
+    	public int nbEnfantTotal;
     	
     }
     

@@ -1,16 +1,100 @@
-@(stats: controllers.Application.Stats)
+@(stats: controllers.Application.Stats,tarif:Tarif)
 
 @header( title:String) = {
     <th >
         @title
     </th>
 }
+<div id="actions">
+        
+     
+         <a class="btn success" id="tarifs" href="@routes.Application.index()">Retour</a>
+        
+    </div>
+
+
 @main("Tarifs") {
 
 
 
+    <h3>Nombre de personnes</h3>
+     <table class="invites zebra-striped">
+            <thead>
+                <tr>
+                   @header("")
+                    @header("Famille Aurelie")
+                    @header("Famille Ivan")
+                    @header("Amis")
+                    @header("Total")
+                </tr>
+            </thead>
+            <tbody>
+           
+ 			
+ 			<tr>
+            	<td>Repas </td>
+            	 <td>@stats.aurelie.nbAdulteRepas / @stats.aurelie.nbEnfantRepas</td>
+            	 <td>@stats.ivan.nbAdulteRepas / @stats.ivan.nbEnfantRepas</td>
+            	 <td>@stats.amis.nbAdulteRepas / @stats.amis.nbEnfantRepas</td>
+            	 <td>@stats.total.nbAdulteRepas / @stats.total.nbEnfantRepas</td>
+ 			</tr>
+ 			
+ 			<tr>
+            	<td>Vin d'honneur </td>
+            	 <td>@stats.aurelie.nbAdulteVin / @stats.aurelie.nbEnfantVin</td>
+            	 <td>@stats.ivan.nbAdulteVin / @stats.ivan.nbEnfantVin</td>
+            	 <td>@stats.amis.nbAdulteVin / @stats.amis.nbEnfantVin</td>
+            	 <td>@stats.total.nbAdulteVin / @stats.total.nbEnfantVin</td>
+ 			</tr>
+ 			
+ 			<tr>
+            	<td>Dimanche </td>
+            	 <td>@stats.aurelie.nbAdulteDimanche / @stats.aurelie.nbEnfantDimanche</td>
+            	 <td>@stats.ivan.nbAdulteDimanche / @stats.ivan.nbEnfantDimanche</td>
+            	 <td>@stats.amis.nbAdulteDimanche / @stats.amis.nbEnfantDimanche</td>
+            	 <td>@stats.total.nbAdulteDimanche / @stats.total.nbEnfantDimanche</td>
+ 			</tr>
+ 			
+            </tbody>
+        </table>
+        
+         <h3>Tarifs par personnes</h3>
+     <table class="invites zebra-striped">
+            <thead>
+                <tr>
+                   @header("")
+                    @header("Adulte")
+                    @header("Enfant")
+                    
+                </tr>
+            </thead>
+            <tbody>
+           
+ 			
+ 			<tr>
+            	<td>Repas </td>
+            	 <td>@tarif.tarifRepas</td>
+            	 <td>@tarif.tarifRepasEnfant</td>
+ 			</tr>
+ 			
+ 			<tr>
+            	<td>Vin d'honneur </td>
+            	 <td>@tarif.tarifVinHonneur</td>
+            	 <td>@tarif.tarifVinHonneurEnfant</td>
+ 			</tr>
+ 			
+ 			<tr>
+            	<td>Dimanche </td>
+            	 <td>@tarif.tarifDimanche</td>
+            	 <td>@tarif.tarifDimancheEnfant</td>
+ 			</tr>
+ 			
+            </tbody>
+        </table>
+        
     
-   <table class="invites zebra-striped">
+    	<h3>Prix</h3>
+     <table class="invites zebra-striped">
             <thead>
                 <tr>
                     @header("")
@@ -21,43 +105,38 @@
                 </tr>
             </thead>
             <tbody>
-            <tr>
-            	 @header("Nombre de personnes")
-            	 <td>@stats.aurelie.nbPersonne</td>
-            	 <td>@stats.ivan.nbPersonne</td>
-            	 <td>@stats.amis.nbPersonne</td>
-            	 <td>@stats.total.nbPersonne</td>
+           
+ 			<tr>
+            		<td>Repas </td>
+            	 <td>@stats.aurelie.repas &#x20AC;</td>
+            	 <td>@stats.ivan.repas &#x20AC;</td>
+            	 <td>@stats.amis.repas &#x20AC;</td>
+            	 <td>@stats.total.repas &#x20AC;</td>
  			</tr>
  			<tr>
-            	 @header("Total repas")
-            	 <td>@stats.aurelie.repas</td>
-            	 <td>@stats.ivan.repas</td>
-            	 <td>@stats.amis.repas</td>
-            	 <td>@stats.total.repas</td>
+            	<td>Vin d'honneur </td>
+            	 <td>@stats.aurelie.vin &#x20AC;</td>
+            	 <td>@stats.ivan.vin &#x20AC;</td>
+            	 <td>@stats.amis.vin &#x20AC;</td>
+            	 <td>@stats.total.vin &#x20AC;</td>
  			</tr>
  			<tr>
-            	 @header("Total Vin d'honneur")
-            	 <td>@stats.aurelie.vin</td>
-            	 <td>@stats.ivan.vin</td>
-            	 <td>@stats.amis.vin</td>
-            	 <td>@stats.total.vin</td>
+            	<td>Dimance </td>
+            	 <td>@stats.aurelie.dimanche &#x20AC;</td>
+            	 <td>@stats.ivan.dimanche &#x20AC;</td>
+            	 <td>@stats.amis.dimanche &#x20AC;</td>
+            	 <td>@stats.total.dimanche &#x20AC;</td>
  			</tr>
  			<tr>
-            	 @header("Total Dimanche")
-            	 <td>@stats.aurelie.dimanche</td>
-            	 <td>@stats.ivan.dimanche</td>
-            	 <td>@stats.amis.dimanche</td>
-            	 <td>@stats.total.dimanche</td>
- 			</tr>
- 			<tr>
-            	 @header("Total")
-            	 <td>@stats.aurelie.total</td>
-            	 <td>@stats.ivan.total</td>
-            	 <td>@stats.amis.total</td>
-            	 <td>@stats.total.total</td>
+            	<td>Total </td>
+            	 <td>@stats.aurelie.total &#x20AC;</td>
+            	 <td>@stats.ivan.total &#x20AC;</td>
+            	 <td>@stats.amis.total &#x20AC;</td>
+            	 <td>@stats.total.total &#x20AC;</td>
  			</tr>
             </tbody>
         </table>
-       
+    
+    	
         
 }

@@ -14,17 +14,24 @@ public class StatsHelper {
 	
 	
 	
-	  public static Stats computStats() {
+	  public static Stats computStats(Tarif tarif) {
 			Stats stats=new Stats();
 			
 			List<Invite> invites=Invite.find.all();
-			Tarif tarif=Tarif.find.findUnique();
+		
 			
 			for(Invite invite:invites){
 				updateStatForInvite(new CalculInvite(invite),stats,tarif);
-				
-				
 			}
+			
+			stats.total.nbAdulteDimanche=stats.aurelie.nbAdulteDimanche+stats.ivan.nbAdulteDimanche+stats.amis.nbAdulteDimanche;
+			stats.total.nbEnfantDimanche=stats.aurelie.nbEnfantDimanche+stats.ivan.nbEnfantDimanche+stats.amis.nbEnfantDimanche;
+			
+			stats.total.nbAdulteRepas=stats.aurelie.nbAdulteRepas+stats.ivan.nbAdulteRepas+stats.amis.nbAdulteRepas;
+			stats.total.nbEnfantRepas=stats.aurelie.nbEnfantRepas+stats.ivan.nbEnfantRepas+stats.amis.nbEnfantRepas;
+			
+			stats.total.nbAdulteVin=stats.aurelie.nbAdulteVin+stats.ivan.nbAdulteVin+stats.amis.nbAdulteVin;
+			stats.total.nbEnfantVin=stats.aurelie.nbEnfantVin+stats.ivan.nbEnfantVin+stats.amis.nbEnfantVin;
 			
 			return stats;
 		}
@@ -51,7 +58,8 @@ public class StatsHelper {
 			stats.total.repas=stats.aurelie.repas.add(stats.ivan.repas).add(stats.amis.repas);
 			stats.total.vin=stats.aurelie.vin.add(stats.ivan.vin).add(stats.amis.vin);
 			stats.total.total=stats.aurelie.total.add(stats.ivan.total).add(stats.amis.total);
-			stats.total.nbPersonne=stats.aurelie.nbPersonne+stats.ivan.nbPersonne+stats.amis.nbPersonne;
+			
+			
 		}
 		
 		
@@ -61,26 +69,37 @@ public class StatsHelper {
 				return;
 			
 			if(invite.isDimanche()){
-				stat.dimanche=compute(stat.dimanche,tarif.tarifDimanche,invite.getInvite().nbAdulte);
+				stat.dimanche=compute(stat.dimanche,tarif.tarifDimanche,tarif.tarifDimancheEnfant,invite.getInvite().nbAdulte,invite.getInvite().nbEnfant);
+				stat.nbAdulteDimanche+=invite.getInvite().nbAdulte;
+				stat.nbEnfantDimanche+=invite.getInvite().nbEnfant;
 			}
-			stat.nbPersonne+=invite.getInvite().nbAdulte;
+			
 			if(invite.isRepas()){
-				stat.repas=compute(stat.repas,tarif.tarifRepas,invite.getInvite().nbAdulte);
-				stat.vin=compute(stat.vin,tarif.tarifVinHonneur,invite.getInvite().nbAdulte);
+				stat.repas=compute(stat.repas,tarif.tarifRepas,tarif.tarifRepasEnfant,invite.getInvite().nbAdulte,invite.getInvite().nbEnfant);
+				stat.vin=compute(stat.vin,tarif.tarifVinHonneur,tarif.tarifVinHonneurEnfant,invite.getInvite().nbAdulte,invite.getInvite().nbEnfant);
+				
+				stat.nbAdulteRepas+=invite.getInvite().nbAdulte;
+				stat.nbEnfantRepas+=invite.getInvite().nbEnfant;
+				stat.nbAdulteVin+=invite.getInvite().nbAdulte;
+				stat.nbEnfantVin+=invite.getInvite().nbEnfant;
 			}
 			
 			if(invite.isVin()){
-				stat.vin=compute(stat.vin,tarif.tarifVinHonneur,invite.getInvite().nbAdulte);
+				stat.vin=compute(stat.vin,tarif.tarifVinHonneur,tarif.tarifVinHonneurEnfant,invite.getInvite().nbAdulte,invite.getInvite().nbEnfant);
+				stat.nbAdulteVin+=invite.getInvite().nbAdulte;
+				stat.nbEnfantVin+=invite.getInvite().nbEnfant;
 			}
 			
 			stat.total=stat.vin.add(stat.repas).add(stat.dimanche);
+			
 		}
 
 
 		private static BigDecimal compute(BigDecimal valueInit,
-				BigDecimal tarif, int nbAdulte) {
-		BigDecimal tarifTotal=tarif.multiply(BigDecimal.valueOf(nbAdulte));
-			return valueInit.add(tarifTotal);
+				BigDecimal tarif,BigDecimal tarifEnfant, int nbAdulte,int NbEnfant) {
+		BigDecimal tarifAdulteTotal=tarif.multiply(BigDecimal.valueOf(nbAdulte));
+		BigDecimal tarifEnfantTotal=tarifEnfant.multiply(BigDecimal.valueOf(NbEnfant));
+			return valueInit.add(tarifAdulteTotal).add(tarifEnfantTotal);
 			
 		}
 
