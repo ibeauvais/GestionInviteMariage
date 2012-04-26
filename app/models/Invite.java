@@ -45,6 +45,7 @@ public class Invite  extends Model{
 	@OneToMany(cascade=CascadeType.ALL)
 	public List<Enfant>enfants;
 	
+	public boolean valide;
 	
     public static Finder<Long,Invite> find = new Finder<Long,Invite>(Long.class, Invite.class); 
 	

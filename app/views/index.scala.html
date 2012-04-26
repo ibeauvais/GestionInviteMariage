@@ -66,6 +66,7 @@
                     @header("Nombre d'adulte", "Nombre d'adulte")
                     @header("Nombre d'enfant", "Nombre d'enfant")
                     @header("presence", "Presence")
+                     @header("Valide", "Valide")
                 </tr>
             </thead>
             <tbody>
@@ -75,6 +76,7 @@
                        	<td>@invite.getNbAdulte()</td>
                        	<td>@invite.getNbEnfant()</td>
                        	<td>@invite.presence</td>
+                       	<td>@if(invite.valide){oui}else{non}
                     </tr>
                 }
 

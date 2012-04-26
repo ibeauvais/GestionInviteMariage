@@ -25,6 +25,7 @@ create table invite (
   nb_adulte                 integer,
   nb_enfant                 integer,
   present_dimanche          integer,
+  valide                    boolean,
   constraint ck_invite_presence check (presence in (0,1,2)),
   constraint ck_invite_type check (type in (0,1,2)),
   constraint ck_invite_present_dimanche check (present_dimanche in (0,1,2)),
@@ -34,8 +35,11 @@ create table invite (
 create table tarif (
   id                        bigint not null,
   tarif_repas               decimal(38),
+  tarif_repas_enfant        decimal(38),
   tarif_vin_honneur         decimal(38),
+  tarif_vin_honneur_enfant  decimal(38),
   tarif_dimanche            decimal(38),
+  tarif_dimanche_enfant     decimal(38),
   constraint pk_tarif primary key (id))
 ;
 

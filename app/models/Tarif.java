@@ -14,8 +14,11 @@ public class Tarif extends Model {
 	public long id;
 	
 	public BigDecimal tarifRepas=BigDecimal.ZERO;
+	public BigDecimal tarifRepasEnfant=BigDecimal.ZERO;
 	public BigDecimal tarifVinHonneur=BigDecimal.ZERO;
+	public BigDecimal tarifVinHonneurEnfant=BigDecimal.ZERO;
 	public BigDecimal tarifDimanche=BigDecimal.ZERO;
+	public BigDecimal tarifDimancheEnfant=BigDecimal.ZERO;
 	
 	
 	
