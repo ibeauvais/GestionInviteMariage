@@ -22,11 +22,21 @@ create table invite (
   nom                       varchar(255),
   presence                  integer,
   type                      integer,
+  nb_adulte                 integer,
+  nb_enfant                 integer,
   present_dimanche          integer,
   constraint ck_invite_presence check (presence in (0,1,2)),
   constraint ck_invite_type check (type in (0,1,2)),
   constraint ck_invite_present_dimanche check (present_dimanche in (0,1,2)),
   constraint pk_invite primary key (id))
+;
+
+create table tarif (
+  id                        bigint not null,
+  tarif_repas               decimal(38),
+  tarif_vin_honneur         decimal(38),
+  tarif_dimanche            decimal(38),
+  constraint pk_tarif primary key (id))
 ;
 
 create table to_do (
@@ -39,6 +49,8 @@ create table to_do (
 create sequence enfant_seq;
 
 create sequence invite_seq;
+
+create sequence tarif_seq;
 
 create sequence to_do_seq;
 
@@ -61,6 +73,8 @@ drop table if exists enfant;
 
 drop table if exists invite;
 
+drop table if exists tarif;
+
 drop table if exists to_do;
 
 SET REFERENTIAL_INTEGRITY TRUE;
@@ -68,6 +82,8 @@ SET REFERENTIAL_INTEGRITY TRUE;
 drop sequence if exists enfant_seq;
 
 drop sequence if exists invite_seq;
+
+drop sequence if exists tarif_seq;
 
 drop sequence if exists to_do_seq;
 

@@ -8,6 +8,7 @@ GET     /invites/new              controllers.Application.create()
 POST    /invites                  controllers.Application.save()
 
 GET     /invites/:id              controllers.Application.edit(id:Long)
+GET     /stats/              controllers.Application.stats()
 POST    /invites/:id              controllers.Application.update(id:Long)
 
 # Delete a computer

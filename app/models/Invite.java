@@ -32,6 +32,9 @@ public class Invite  extends Model{
 	public Presence presence;
 	public Type type;
 	
+	public int nbAdulte;
+	public int nbEnfant;
+	
 	@OneToOne(mappedBy="invite")
 	public ToDo todo;
 	
@@ -100,27 +103,30 @@ public static Map<String,String> presencesDimanche(){
 
 	 
 	 public int getNbAdulte(){
-		 if(adultes==null)
-			 return 0;
-		 else
-			 return adultes.size();
+//		 if(adultes==null)
+//			 return 0;
+//		 else
+//			 return adultes.size();
+		 return nbAdulte;
 	 }
 	 
 	 public int getNbEnfant(){
-		 if(enfants==null)
-			 return 0;
-		 else
-			 return enfants.size();
+//		 if(enfants==null)
+//			 return 0;
+//		 else
+//			 return enfants.size();
+		 return nbEnfant;
 	 }
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Invite [id=").append(id).append(", nom=").append(nom)
-				.append(", presence=").append(presence).append(", todo=")
+				.append(", presence=").append(presence).append(", type=")
+				.append(type).append(", nbAdulte=").append(nbAdulte)
+				.append(", nbEnfant=").append(nbEnfant).append(", todo=")
 				.append(todo).append(", presentDimanche=")
-				.append(presentDimanche).append(", adultes=").append(adultes)
-				.append(", enfants=").append(enfants).append("]");
+				.append(presentDimanche).append("]");
 		return builder.toString();
 	}
 }

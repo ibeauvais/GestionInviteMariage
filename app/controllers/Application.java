@@ -1,11 +1,15 @@
 package controllers;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import models.Invite;
+import models.Tarif;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
 
+import views.html.*;
 import com.avaje.ebean.annotation.Transactional;
 
 public class Application extends Controller {
@@ -28,10 +32,15 @@ public class Application extends Controller {
 	        );
   }
 	
-	
+	 public static Result stats() {
+		 Stats aStats=StatsHelper.computStats(); 
+		 return ok(stats.render(aStats));
+	    }
 	
 		
-    public static Result create() {
+  
+
+	public static Result create() {
         Form<Invite> inviteForm = form(Invite.class);
         return ok(
         		createForm.render(inviteForm)
@@ -71,6 +80,24 @@ public class Application extends Controller {
         Invite.find.ref(id).delete();
         flash("success", "Invite has been deleted");
         return GO_HOME;
+    }
+    
+    
+    public static class Stat{
+    	public int nbPersonne;
+    	public BigDecimal repas=BigDecimal.ZERO;
+    	public BigDecimal vin=BigDecimal.ZERO;
+    	public BigDecimal dimanche=BigDecimal.ZERO;;
+    	public BigDecimal total=BigDecimal.ZERO;;
+    	
+    }
+    
+    public static class Stats{
+    	public Stat aurelie=new Stat();
+    	public Stat ivan=new Stat();
+    	public Stat amis=new Stat();
+    	public Stat total=new Stat();
+    	
     }
     
     

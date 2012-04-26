@@ -1,0 +1,63 @@
+@(stats: controllers.Application.Stats)
+
+@header( title:String) = {
+    <th >
+        @title
+    </th>
+}
+@main("Tarifs") {
+
+
+
+    
+   <table class="invites zebra-striped">
+            <thead>
+                <tr>
+                    @header("")
+                    @header("Famille Aurelie")
+                    @header("Famille Ivan")
+                    @header("Amis")
+                    @header("Total")
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+            	 @header("Nombre de personnes")
+            	 <td>@stats.aurelie.nbPersonne</td>
+            	 <td>@stats.ivan.nbPersonne</td>
+            	 <td>@stats.amis.nbPersonne</td>
+            	 <td>@stats.total.nbPersonne</td>
+ 			</tr>
+ 			<tr>
+            	 @header("Total repas")
+            	 <td>@stats.aurelie.repas</td>
+            	 <td>@stats.ivan.repas</td>
+            	 <td>@stats.amis.repas</td>
+            	 <td>@stats.total.repas</td>
+ 			</tr>
+ 			<tr>
+            	 @header("Total Vin d'honneur")
+            	 <td>@stats.aurelie.vin</td>
+            	 <td>@stats.ivan.vin</td>
+            	 <td>@stats.amis.vin</td>
+            	 <td>@stats.total.vin</td>
+ 			</tr>
+ 			<tr>
+            	 @header("Total Dimanche")
+            	 <td>@stats.aurelie.dimanche</td>
+            	 <td>@stats.ivan.dimanche</td>
+            	 <td>@stats.amis.dimanche</td>
+            	 <td>@stats.total.dimanche</td>
+ 			</tr>
+ 			<tr>
+            	 @header("Total")
+            	 <td>@stats.aurelie.total</td>
+            	 <td>@stats.ivan.total</td>
+            	 <td>@stats.amis.total</td>
+            	 <td>@stats.total.total</td>
+ 			</tr>
+            </tbody>
+        </table>
+       
+        
+}

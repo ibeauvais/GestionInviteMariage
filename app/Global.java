@@ -2,6 +2,7 @@
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import models.Adulte;
 import models.Enfant;
@@ -9,6 +10,7 @@ import models.Invite;
 import models.Invite.Presence;
 import models.Invite.PresentDimanche;
 import models.Invite.Type;
+import models.Tarif;
 import models.ToDo;
 
 import org.apache.commons.lang.StringUtils;
@@ -58,6 +60,12 @@ public class Global extends GlobalSettings {
 			
 			addInvite(line);
 		}
+		
+		Tarif tarif=new Tarif();
+		tarif.tarifDimanche=BigDecimal.valueOf(30);
+		tarif.tarifRepas=BigDecimal.valueOf(60);
+		tarif.tarifVinHonneur=BigDecimal.valueOf(20);
+		tarif.save();
 	}
 
 	private String getLineUsed(String line) {
@@ -129,6 +137,7 @@ public class Global extends GlobalSettings {
 	private void addEnfant(Invite invite, String nbEnfantString) {
 		try{
 			int nbEnfant=Integer.parseInt(nbEnfantString);
+			invite.nbEnfant=nbEnfant;
 			for(int i=0;i<nbEnfant;i++){
 				Enfant enfant=new Enfant();
 				enfant.nom="enfant"+(i+1)+" nom";
@@ -153,6 +162,7 @@ public class Global extends GlobalSettings {
 	private void addAdulte(Invite invite, String nbAdulteString) {
 		try{
 			int nbAdulte=Integer.parseInt(nbAdulteString);
+			invite.nbAdulte=nbAdulte;
 			for(int i=0;i<nbAdulte;i++){
 				Adulte adulte=new Adulte();
 				adulte.nom="adulte"+(i+1)+" nom";
