@@ -1,0 +1,52 @@
+@(tarifForm: Form[Tarif])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Modification"){
+    <br/><br/><br/><br/>
+    <h1>Modification Tarif</h1>
+    
+    @form(routes.Application.updateTarif()) {
+        
+        <fieldset>
+        	  <legend>Repas (Par personne):</legend>
+             @inputText(tarifForm("tarifRepas"), '_label -> "Adulte")
+                @inputText(tarifForm("tarifRepasEnfant"), '_label -> "Enfant")
+            
+        
+        </fieldset>
+         <fieldset>
+        	  <legend>Vin d'honneur (Par personne):</legend>
+             @inputText(tarifForm("tarifVinHonneur"), '_label -> "Adulte")
+                @inputText(tarifForm("tarifVinHonneurEnfant"), '_label -> "Enfant")
+            
+        
+        </fieldset>
+        <fieldset>
+        	  <legend>Dimanche (Par personne):</legend>
+             @inputText(tarifForm("tarifDimanche"), '_label -> "Adulte")
+                @inputText(tarifForm("tarifDimancheEnfant"), '_label -> "Enfant")
+            
+        
+        </fieldset>
+        
+         <fieldset>
+        	  <legend>Frais supplementaires:</legend>
+             @inputText(tarifForm("animations"), '_label -> "Animations vin d'honneur")
+                @inputText(tarifForm("serveurs"), '_label -> "Frais Serveur")
+                  @inputText(tarifForm("vaisselles"), '_label -> "Vaisselles")
+            
+        
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Modification" class="btn primary"> or 
+            <a href="@routes.Application.stats()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+  
+}

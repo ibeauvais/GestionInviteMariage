@@ -6,6 +6,8 @@
 GET     /                             controllers.Application.index(p:Int ?= 0, s ?= "nom", o ?= "asc", f ?= "")
 GET     /invites/new              controllers.Application.create()
 POST    /invites                  controllers.Application.save()
+GET    /tarifs/edit                 controllers.Application.editTarif()
+POST    /tarif/update                  controllers.Application.updateTarif()
 
 GET     /invites/:id              controllers.Application.edit(id:Long)
 GET     /stats/              controllers.Application.stats()

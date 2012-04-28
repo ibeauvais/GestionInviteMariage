@@ -34,16 +34,7 @@ public class Application extends Controller {
 	
 	
 	
-	/**
-	 * TODO ajouter dj inviter mystere nounou + nous 
-	 * Tarifs Vin 15 +7 €
-	 * + anim 80 +370 
-	 * Repas 45€ + 10€
-	 * 1200 € Serveur
-	 * 350 € vaiselle
-	 * 
-	 * @return
-	 */
+	
 	 public static Result stats() {
 			Tarif tarif=Tarif.find.findUnique();
 		 Stats aStats=StatsHelper.computStats(tarif); 
@@ -67,6 +58,30 @@ public class Application extends Controller {
             editForm.render(id, computerForm)
         );
     }
+    
+    
+    public static Result editTarif() {
+        Form<Tarif> tarifForm = form(Tarif.class).fill(
+        		Tarif.find.findUnique());
+        
+        return ok(
+            editTarif.render(tarifForm)
+        );
+    }
+    
+    
+    @Transactional
+    public static Result updateTarif() {
+        Form<Tarif> tarifForm = form(Tarif.class).bindFromRequest();
+        if(tarifForm.hasErrors()) {
+            return badRequest(editTarif.render(tarifForm));
+        }
+        tarifForm.get().update(Tarif.find.findUnique().id);
+        flash("success", "Tarif  has been updated");
+        return stats();
+    }
+    
+    
     @Transactional
     public static Result update(Long id) {
         Form<Invite> inviteForm = form(Invite.class).bindFromRequest();

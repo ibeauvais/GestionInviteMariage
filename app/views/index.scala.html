@@ -35,17 +35,17 @@
     </th>
 }
 @main("Home") {
-
+<br/><br/><br/><br/>
 <div id="actions">
         
         <form action="@link(0, "nom")" method="GET">
             <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by computer name...">
             <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
         </form>
-        
-        <a class="btn success" id="add" href="@routes.Application.create()">Ajout</a>
-         <a class="btn success" id="tarifs" href="@routes.Application.stats()">Stats</a>
-        
+        <div>
+        <a class="btn success" id="add" href="@routes.Application.create()">Ajout Invite </a>
+        <a class="btn btn-info" id="tarifs" href="@routes.Application.stats()">Stats</a>
+        </div>
     </div>
 
 

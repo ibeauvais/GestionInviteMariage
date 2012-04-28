@@ -19,6 +19,9 @@ public class Tarif extends Model {
 	public BigDecimal tarifVinHonneurEnfant=BigDecimal.ZERO;
 	public BigDecimal tarifDimanche=BigDecimal.ZERO;
 	public BigDecimal tarifDimancheEnfant=BigDecimal.ZERO;
+	public BigDecimal animations=BigDecimal.ZERO;
+	public BigDecimal vaisselles=BigDecimal.ZERO;
+	public BigDecimal serveurs=BigDecimal.ZERO;
 	
 	
 	

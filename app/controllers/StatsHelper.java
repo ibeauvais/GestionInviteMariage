@@ -68,20 +68,23 @@ public class StatsHelper {
 			if(invite.isAbsent())
 				return;
 			
-			if(invite.isDimanche()){
+			if(invite.isDimanche() || invite.isDimancheUniquement()){
 				stat.dimanche=compute(stat.dimanche,tarif.tarifDimanche,tarif.tarifDimancheEnfant,invite.getInvite().nbAdulte,invite.getInvite().nbEnfant);
 				stat.nbAdulteDimanche+=invite.getInvite().nbAdulte;
 				stat.nbEnfantDimanche+=invite.getInvite().nbEnfant;
 			}
 			
-			if(invite.isRepas()){
+			if(invite.isRepas() || invite.isRepasSansVin()){
 				stat.repas=compute(stat.repas,tarif.tarifRepas,tarif.tarifRepasEnfant,invite.getInvite().nbAdulte,invite.getInvite().nbEnfant);
-				stat.vin=compute(stat.vin,tarif.tarifVinHonneur,tarif.tarifVinHonneurEnfant,invite.getInvite().nbAdulte,invite.getInvite().nbEnfant);
+				if(invite.isRepas())
+					stat.vin=compute(stat.vin,tarif.tarifVinHonneur,tarif.tarifVinHonneurEnfant,invite.getInvite().nbAdulte,invite.getInvite().nbEnfant);
 				
 				stat.nbAdulteRepas+=invite.getInvite().nbAdulte;
 				stat.nbEnfantRepas+=invite.getInvite().nbEnfant;
+				if(invite.isRepas()){
 				stat.nbAdulteVin+=invite.getInvite().nbAdulte;
 				stat.nbEnfantVin+=invite.getInvite().nbEnfant;
+				}
 			}
 			
 			if(invite.isVin()){
@@ -140,6 +143,14 @@ public class StatsHelper {
 			
 			public boolean isDimanche(){
 				return Invite.PresentDimanche.OUI.equals(invite.presentDimanche);
+			}
+			
+			public boolean isRepasSansVin(){
+				return Invite.Presence.REPAS_SANS_VIN.equals(invite.presence);
+			}
+			
+			public boolean isDimancheUniquement(){
+				return Invite.Presence.DIMANCHE_UNIQUEMENT.equals(invite.presence);
 			}
 		}
 

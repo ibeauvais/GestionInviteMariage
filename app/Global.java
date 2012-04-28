@@ -3,6 +3,7 @@
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
 
 import models.Adulte;
 import models.Enfant;
@@ -29,7 +30,27 @@ public class Global extends GlobalSettings {
 		super.onStart(arg0);
 		
 		//importDataIfDbEmpty();
+		List<Tarif> tarifs=Tarif.find.all();
+		
+		if(tarifs.size()==0){
+		createTarif();
+		}else if(tarifs.size()>1){
+			for(Tarif t:tarifs)
+				t.delete();
+			
+			createTarif();
+		}
+		
+		
 		 Logger.info("Application has started");
+	}
+
+	private void createTarif() {
+		Tarif tarif=new Tarif();
+		tarif.tarifDimanche=BigDecimal.valueOf(30);
+		tarif.tarifRepas=BigDecimal.valueOf(60);
+		tarif.tarifVinHonneur=BigDecimal.valueOf(20);
+		tarif.save();
 	}
 
 	private void importDataIfDbEmpty() {
@@ -61,11 +82,7 @@ public class Global extends GlobalSettings {
 			addInvite(line);
 		}
 		
-		Tarif tarif=new Tarif();
-		tarif.tarifDimanche=BigDecimal.valueOf(30);
-		tarif.tarifRepas=BigDecimal.valueOf(60);
-		tarif.tarifVinHonneur=BigDecimal.valueOf(20);
-		tarif.save();
+	
 	}
 
 	private String getLineUsed(String line) {

@@ -1,5 +1,3 @@
-# --- Created by Ebean DDL
-# To stop Ebean DDL generation, remove this comment and start using Evolutions
 
 # --- !Ups
 
@@ -40,6 +38,9 @@ create table tarif (
   tarif_vin_honneur_enfant  decimal(38),
   tarif_dimanche            decimal(38),
   tarif_dimanche_enfant     decimal(38),
+  animations                decimal(38),
+  vaisselles                decimal(38),
+  serveurs                  decimal(38),
   constraint pk_tarif primary key (id))
 ;
 

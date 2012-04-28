@@ -20,7 +20,7 @@ import com.avaje.ebean.Page;
 public class Invite  extends Model{
 	
 	
-	public enum Presence{REPAS,VIN_D_HONNEUR,ABSENCE}
+	public enum Presence{REPAS,VIN_D_HONNEUR,ABSENCE,REPAS_SANS_VIN,DIMANCHE_UNIQUEMENT}
 	public enum Type{FAMILLE_IVAN,FAMILLE_AURELIE,AMIS}
 	public enum PresentDimanche{NON_RENSEIGNE,NON,OUI}
 	
