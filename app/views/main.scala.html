@@ -1,27 +1,41 @@
 @(title: String)(content: Html)
-
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
     <head>
         <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")"> 
-        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")"> 
+         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")"> 
         <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
     </head>
     <body>
+         <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
         
-        <header class="topbar">
-            <h1 class="fill">
-                
-                   Mariage Count
-               
-            </h1>
-        </header>
-        
-        <section id="main">
+          <a class="brand" href="#">Mariage Count</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="@routes.Application.index()">Home</a></li>
+              <li><a href="@routes.Application.create()">Ajout Invite</a></li>
+              <li><a href="@routes.Application.stats()">Statistiques</a></li>
+               <li><a href="@routes.Application.editTarif()">Modifications Tarifs</a></li>
+            </ul>
+          </div>
+           <div class="btn-group pull-right">
+           
+                 
+      
+  
+          </div>
+        </div>
+      </div>
+    </div>
+ <section id="main">
+    <div class="container-fluid">
+      <div class="row-fluid">
+      <br/><br/><br/><br/><br/><br/>
             @content
-        </section>
+       </div>
+   </div>
+   </section>
     </body>
 </html>

@@ -51,11 +51,14 @@ public class Application extends Controller {
         );
     }
     public static Result edit(Long id) {
-        Form<Invite> computerForm = form(Invite.class).fill(
+        Form<Invite> inviteForm = form(Invite.class).fill(
         		Invite.find.byId(id)
         );
+        
+        System.out.println(inviteForm);
+
         return ok(
-            editForm.render(id, computerForm)
+            editForm.render(id, inviteForm)
         );
     }
     

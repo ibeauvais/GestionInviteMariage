@@ -35,20 +35,9 @@
     </th>
 }
 @main("Home") {
-<br/><br/><br/><br/>
-<div id="actions">
-        
-        <form action="@link(0, "nom")" method="GET">
-            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by computer name...">
-            <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
-        </form>
-        <div>
-        <a class="btn success" id="add" href="@routes.Application.create()">Ajout Invite </a>
-        <a class="btn btn-info" id="tarifs" href="@routes.Application.stats()">Stats</a>
-        </div>
-    </div>
 
 
+ <div class="span9">
 
 @if(currentPage.getTotalRowCount == 0) {
         
@@ -59,7 +48,7 @@
     } else {
     
     
-   <table class="invites zebra-striped">
+   <table class="table">
             <thead>
                 <tr>
                     @header("nom", "nom")
@@ -82,30 +71,7 @@
 
             </tbody>
         </table>
-           <div id="pagination" class="pagination">
-            <ul>
-                @if(currentPage.hasPrev) {
-                    <li class="prev">
-                        <a href="@link(currentPage.getPageIndex - 1, null)">&larr; Previous</a>
-                    </li>
-                } else {
-                    <li class="prev disabled">
-                        <a>&larr; Previous</a>
-                    </li>
-                }
-                <li class="current">
-                    <a>Displaying @currentPage.getDisplayXtoYofZ(" to "," of ")</a>
-                </li>
-                @if(currentPage.hasNext) {
-                    <li class="next">
-                        <a href="@link(currentPage.getPageIndex + 1, null)">Next &rarr;</a>
-                    </li>
-                } else {
-                    <li class="next disabled">
-                        <a>Next &rarr;</a>
-                    </li>
-                }
-            </ul>
-        </div>
+          
         }
+        </div>
 }

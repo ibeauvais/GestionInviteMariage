@@ -8,11 +8,11 @@
     
     <h1>Modification Invite</h1>
     
-    @form(routes.Application.update(id)) {
+    @form(action = routes.Application.update(id), args = 'class -> "inviteForm") {
         
         <fieldset>
-        
-             @inputText(inviteForm("nom"), '_label -> "Libelle")
+     
+             @inputText(field=inviteForm("nom"), '_label -> "Libelle")
               @inputText(inviteForm("nbAdulte"), '_label -> "Nombre d'adulte")
                @inputText(inviteForm("nbEnfant"), '_label -> "Nombre d'enfant")
              @checkbox(inviteForm("valide"), '_label -> "Valide")
