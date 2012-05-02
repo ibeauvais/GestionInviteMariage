@@ -16,7 +16,7 @@ public class Application extends Controller {
 	
 	
 	 public static Result GO_HOME = redirect(
-		        routes.Application.index(0, "nom", "asc", "")
+		        routes.Application.index( "nom", "asc", "")
 		    );
 		    
 		   
@@ -24,9 +24,9 @@ public class Application extends Controller {
 	
   
 	@Transactional(readOnly=true)
-  public static Result index(int page, String sortBy, String order, String filter) {
+  public static Result index( String sortBy, String order, String filter) {
 	  return ok(index.render(
-	                Invite.page(page, 50, sortBy, order, filter),
+	                Invite.page(0, 100, sortBy, order, filter),
 	                sortBy, order, filter
 	            )
 	        );

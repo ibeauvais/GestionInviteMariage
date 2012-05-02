@@ -1,4 +1,4 @@
-@(inviteForm: Form[Invite])
+@(inviteForm: Form[models.Invite])
 
 @import helper._
 
@@ -39,7 +39,7 @@
         </fieldset>
         
         <div class="actions">
-            <input type="submit" value="Ajout de l'invite" class="btn primary"> or 
+            <input type="submit" value="Ajout de l'invite" class="btn-primary"> or 
             <a href="@routes.Application.index()" class="btn">Cancel</a> 
         </div>
         

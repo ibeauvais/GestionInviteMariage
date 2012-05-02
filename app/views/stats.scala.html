@@ -9,9 +9,9 @@
 
 @main("Tarifs") {
 <br/><br/><br/>
-<a class="btn btn-info" id="tarifs" href="@routes.Application.index()">Retour</a>
+
     <h3>Nombre de personnes</h3>  
-     <table class="invites zebra-striped">
+     <table class="table">
             <thead>
                 <tr>
                    @header("")
@@ -51,8 +51,8 @@
             </tbody>
         </table>
         
-      <div><h3>Tarifs par personnes</h3>  <a class="btn btn-success" id="tarifs" href="@routes.Application.editTarif()">Editer</a></div>
-     <table class="invites zebra-striped">
+    <h3>Tarifs par personnes</h3> 
+     <table class="table">
             <thead>
                 <tr>
                    @header("")
@@ -87,7 +87,7 @@
         
     
     	<h3>Prix</h3>
-     <table class="invites zebra-striped">
+     <table class="table">
             <thead>
                 <tr>
                     @header("")

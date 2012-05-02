@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                             controllers.Application.index(p:Int ?= 0, s ?= "nom", o ?= "asc", f ?= "")
+GET     /                             controllers.Application.index( s ?= "nom", o ?= "asc", f ?= "")
 GET     /invites/new              controllers.Application.create()
 POST    /invites                  controllers.Application.save()
 GET    /tarifs/edit                 controllers.Application.editTarif()
