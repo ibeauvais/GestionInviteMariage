@@ -7,8 +7,8 @@
 @main("Modification"){
     
     <h1>Modification Invite</h1>
-    
-    @form(action = routes.Application.update(id), args = 'class -> "inviteForm") {
+    <div>
+    @form(routes.Application.update(id)) {
         
         <fieldset>
      
@@ -37,9 +37,13 @@
                 '_label -> "Presence", '_default -> "--",
                 '_showConstraints -> true
             )
+            
+            <div id="adultes">
+            
+            </div>
         
         </fieldset>
-        
+        </div>
         <div class="actions">
             <input type="submit" value="Modification" class="btn-primary"> or 
             <a href="@routes.Application.index()" class="btn">Cancel</a> 
