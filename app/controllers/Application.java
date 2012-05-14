@@ -5,12 +5,17 @@ import java.util.List;
 
 import models.Invite;
 import models.Tarif;
+import org.codehaus.jackson.JsonNode;
+import play.api.mvc.BodyParser;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
 import views.html.*;
 import com.avaje.ebean.annotation.Transactional;
+import views.html.index;
+import views.html.stats;
 
 public class Application extends Controller {
 	
@@ -18,17 +23,21 @@ public class Application extends Controller {
 	 public static Result GO_HOME = redirect(
 		        routes.Application.index( "nom", "asc", "")
 		    );
-		    
-		   
-		
-	
+		/*    
+	@BodyParser.Of(Json.class)
+    public static Result addAdulteJson(){
+       JsonNode json = request().body().asJson();
+        String adulteName = json.asText();
+        System.out.println(adulteName);
+    }
+	*/
   
 	@Transactional(readOnly=true)
   public static Result index( String sortBy, String order, String filter) {
 	  return ok(index.render(
-	                Invite.page(0, 100, sortBy, order, filter),
-	                sortBy, order, filter
-	            )
+              Invite.page(0, 100, sortBy, order, filter),
+              sortBy, order, filter
+      )
 	        );
   }
 	
@@ -38,7 +47,7 @@ public class Application extends Controller {
 	 public static Result stats() {
 			Tarif tarif=Tarif.find.findUnique();
 		 Stats aStats=StatsHelper.computStats(tarif); 
-		 return ok(stats.render(aStats,tarif));
+		 return ok(stats.render(aStats, tarif));
 	    }
 	
 		
